@@ -3,6 +3,7 @@ import { MenuItem, FormControl, Select, Card, CardContent } from "@material-ui/c
 import InfoBox from './InputBox';
 import Map from './Map';
 import Table from './Table';
+import {sortedData, sortData} from './Util';
 import './App.css';
 
 function App() {
@@ -26,8 +27,9 @@ function App() {
             name: country.country,
             value: country.countryInfo.iso2,
           }));
+
           setCountries(countries);
-          // setTableData()
+          setTableData(sortData(data))
         });
     };
     getCountriesData();
@@ -56,8 +58,8 @@ function App() {
             <Select variant="outlined" onChange={onCountryChange} value={country}>
               <MenuItem value="worldwide">Worldwide</MenuItem>
               {
-                countries.map(country => {
-                  return (<MenuItem value={country.value}>{country.name}</MenuItem>)
+                countries.map((country,index) => {
+                  return (<MenuItem key= {index} value={country.value}>{country.name}</MenuItem>)
                 })
               }
             </Select>
@@ -73,7 +75,7 @@ function App() {
       <Card className="app__right">
         <CardContent>
           <h3>worldwide total cases </h3>
-          <Table />
+          <Table countries ={tableData}/>
         </CardContent>
       </Card>
     </div>
