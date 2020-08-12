@@ -64,7 +64,7 @@ function App() {
     <div className="app">
       <div className="app__left">
         <div className="app__header">
-          <h1>Covid Tracker in React js </h1>
+          <h1>Covid Tracker in React js <small>By Ajeet jha</small></h1>
           <FormControl className="app__dropdown">
             <Select variant="outlined" onChange={onCountryChange} value={country}>
               <MenuItem value="worldwide">Worldwide</MenuItem>
