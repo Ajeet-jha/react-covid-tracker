@@ -4,13 +4,15 @@ import InfoBox from './InputBox';
 import Map from './Map';
 import Table from './Table';
 import {sortedData, sortData} from './Util';
+import LineGraph from './LineGraph';
 import './App.css';
 
 function App() {
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState("worldwide");
-  const [countryInfo, setCountryInfo] = useState({})
-  const [tableData, setTableData] = useState([])
+  const [countryInfo, setCountryInfo] = useState({});
+  const [tableData, setTableData] = useState([]);
+  const [casesType, setCasesType] = useState("cases");
   useEffect(() => {
     fetch("https://disease.sh/v3/covid-19/all")
       .then((response) => response.json())
@@ -77,6 +79,7 @@ function App() {
           <h3>worldwide total cases </h3>
           <Table countries ={tableData}/>
         </CardContent>
+        <LineGraph  casesType={casesType}/>
       </Card>
     </div>
   );
