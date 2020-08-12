@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MenuItem, FormControl, Select, Card, CardContent } from "@material-ui/core";
-import InfoBox from './InputBox';
+import InfoBox from './InfoBox';
 import Map from './Map';
 import Table from './Table';
 import {sortedData, sortData, prettyPrintStat} from './Util';
@@ -77,9 +77,9 @@ function App() {
           </FormControl>
         </div>
         <div className="app__stats">
-          <InfoBox title="CoronaVirus cases" cases={prettyPrintStat(countryInfo.todayCases)} total={prettyPrintStat(countryInfo.cases)} />
-          <InfoBox title="Recovered" cases={prettyPrintStat(countryInfo.todayRecovered)} total={prettyPrintStat(countryInfo.recovered)} />
-          <InfoBox title="Death" cases={prettyPrintStat(countryInfo.todayDeaths)} total={prettyPrintStat(countryInfo.deaths)} />
+          <InfoBox isRed active = {casesType === "cases"} onClick = {e => setCasesType("cases")} title="CoronaVirus cases" cases={prettyPrintStat(countryInfo.todayCases)} total={prettyPrintStat(countryInfo.cases)} />
+          <InfoBox active = {casesType === "recovered"} onClick = {e => setCasesType("recovered")} title="Recovered" cases={prettyPrintStat(countryInfo.todayRecovered)} total={prettyPrintStat(countryInfo.recovered)} />
+          <InfoBox isRed active = {casesType === "deaths"} onClick = {e => setCasesType("deaths")} title="Death" cases={prettyPrintStat(countryInfo.todayDeaths)} total={prettyPrintStat(countryInfo.deaths)} />
         </div>
         <Map
           center={mapCenter}
@@ -92,8 +92,8 @@ function App() {
         <CardContent>
           <h3>worldwide total cases </h3>
           <Table countries ={tableData}/>
+          <LineGraph  casesType={casesType}/>
         </CardContent>
-        <LineGraph  casesType={casesType}/>
       </Card>
     </div>
   );
